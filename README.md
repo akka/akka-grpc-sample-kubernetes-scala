@@ -1,11 +1,11 @@
 # Akka gRPC Kubernetes
 
-This is a demo of an Akka Http application communicating with an Akka gRPC application inside of Kubernetes.
+This is a demo of an Akka HTTP application communicating with an Akka gRPC application inside of Kubernetes.
 
-The Akka Http application discovers the Akka gRPC application using [Akka Discovery](https://developer.lightbend.com/docs/akka-management/current/discovery.html)
+The Akka HTTP application discovers the Akka gRPC application using [Akka Discovery](https://developer.lightbend.com/docs/akka-management/current/discovery.html)
 via the `akka-dns` mechanism that uses the `SRV` records created by kubernetes.
 
-The Docker images and Kubernetes resources are generated automatically by the [sbt-reactive-app](https://developer.lightbend.com/docs/lightbend-orchestration/current/)
+The Docker images and Kubernetes resources are generated automatically by the [sbt-reactive-app](https://developer.lightbend.com/docs/lightbend-orchestration/current/) sbt plugin.
 
 All the technologies used in this example are open source.
 
@@ -19,6 +19,7 @@ Install the following:
 * [Kubectl](https://kubernetes.io/docs/tasks/tools/install-kubectl/)
 * [Minikube](https://github.com/kubernetes/minikube)
 * [Sbt](https://www.scala-sbt.org/)
+* [reactive-cli](https://developer.lightbend.com/docs/lightbend-orchestration/current/setup/cli-installation.html)
 
 ### Running
 
