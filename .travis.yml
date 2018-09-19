@@ -3,16 +3,16 @@ scala:
   - 2.12.6
 jdk:
 - oraclejdk8
-- oraclejdk9
 - oraclejdk10
 - oraclejdk11
 
 cache:
   directories:
-  - "$HOME/.ivy2/cache"
+  - $HOME/.ivy2/cache
+  - $HOME/.sbt
 
 before_cache:
 - rm -rf $HOME/.ivy2/cache/com.typesafe.play/*
 - rm -rf $HOME/.ivy2/cache/scala_*/sbt_*/com.typesafe.play/*
-- find $HOME/.ivy2/cache -name "ivydata-*.properties" -print0 | xargs -n10 -0 rm
-
+- find $HOME/.ivy2/cache -name "ivydata-*.properties" -print -delete
+- find $HOME/.sbt        -name "*.lock"               -print -delete
