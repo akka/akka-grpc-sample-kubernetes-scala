@@ -1,17 +1,28 @@
 # Akka gRPC Kubernetes
 
-This is a demo of an Akka HTTP application communicating with an Akka gRPC application inside of Kubernetes.
+This is an example of an [Akka HTTP](https://doc.akka.io/docs/akka-http/current) application communicating with an [Akka gRPC](https://developer.lightbend.com/docs/akka-grpc/current/) application inside of Kubernetes.
 
-The Akka HTTP application discovers the Akka gRPC application using [Akka Discovery](https://developer.lightbend.com/docs/akka-management/current/discovery.html)
-via the `akka-dns` mechanism that uses the `SRV` records created by kubernetes.
+The Akka HTTP application discovers the Akka gRPC application using [Akka Discovery](https://developer.lightbend.com/docs/akka-management/current/discovery.html).
+It uses the `akka-dns` mechanism which relies on the `SRV` records created by kubernetes.
 
 The Docker images and Kubernetes resources are generated automatically by the [sbt-reactive-app](https://developer.lightbend.com/docs/lightbend-orchestration/current/) sbt plugin.
 
 All the technologies used in this example are open source.
 
-## Demo 
+## Other approaches
 
-### Prereqs
+This project uses sbt,
+the [sbt-reactive-app](https://developer.lightbend.com/docs/lightbend-orchestration/current/)
+plugin and the Scala language.
+
+If you are using Java and sbt you can use exactly the same approach.
+
+If you are using another build tool, such as Maven or Gradle, the code would
+still be the same, but you would have to build the Docker image and deploy it to Kubernetes yourself.
+
+## Usage
+
+### Prerequisites
 
 Install the following:
 
@@ -39,7 +50,7 @@ httptogrpc-v0-1-0-snapshot    1         1         1            1           40s
 
 There are servies for both:
 ```
-kubectl get services                                                                                                                                                                                                                                                                                                                                          
+$ kubectl get services
 NAME          TYPE        CLUSTER-IP       EXTERNAL-IP   PORT(S)    AGE
 grpcservice   ClusterIP   10.106.188.203   <none>        8080/TCP   1m
 httptogrpc    ClusterIP   10.103.134.197   <none>        8080/TCP   1m
@@ -48,10 +59,9 @@ httptogrpc    ClusterIP   10.103.134.197   <none>        8080/TCP   1m
 Ingress just for the HTTP app:
 
 ```
-kubectl get ingress
+$ kubectl get ingress
 NAME         HOSTS              ADDRESS   PORTS     AGE
 httptogrpc   superservice.com             80        2m
-
 ```
 
 The HTTP application periodically hits the gRPC applicaton which you can see in the logs:
@@ -64,8 +74,7 @@ The HTTP application periodically hits the gRPC applicaton which you can see in 
 And you can send a HTTP request via `Ingress` to the `httptogrpc` application:
 
 ```
-curl -v --header 'Host: superservice.com' $(minikube ip)/hello/donkey                                                                                                                                                                                                                                                                                         
-
+$ curl -v --header 'Host: superservice.com' $(minikube ip)/hello/donkey
 > GET /hello/donkey HTTP/1.1
 > Host: superservice.com
 > User-Agent: curl/7.59.0
@@ -82,4 +91,4 @@ curl -v --header 'Host: superservice.com' $(minikube ip)/hello/donkey
 Hello, donkey%
 ```
 
-The `Host` header needs to be set as that is how minikube Ingress routes requests to services.
+The `Host` header needs to be set as that is how minikube [Ingress](https://github.com/kubernetes/ingress-nginx) routes requests to services.
