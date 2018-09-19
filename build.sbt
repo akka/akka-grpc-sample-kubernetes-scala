@@ -1,10 +1,9 @@
 name := "akka-grpc-kubernetes"
 scalaVersion := "2.12.6"
 
-lazy val akkaVersion = "2.5.14"
-lazy val akkaGrpcVersion = "0.2-RC1+6-dd0f5837+20180814-1154"
-lazy val discoveryVersion = "0.17.0"
-lazy val akkaHttpVersion = "10.1.3"
+lazy val akkaVersion = "2.5.16"
+lazy val discoveryVersion = "0.18.0"
+lazy val akkaHttpVersion = "10.1.5"
 lazy val alpnVersion = "2.0.7"
 
 lazy val root = (project in file("."))
