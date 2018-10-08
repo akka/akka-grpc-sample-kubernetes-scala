@@ -34,6 +34,13 @@ lazy val httpToGrpc = (project in file("http-to-grpc"))
 lazy val grpcService = (project in file("grpc-service"))
   .enablePlugins(AkkaGrpcPlugin, SbtReactiveAppPlugin, JavaAgent)
   .settings(
+    /** Update akka-management
+    libraryDependencies ++= Seq(
+      "com.lightbend.akka.management" %% "akka-management" % discoveryVersion,
+      "com.lightbend.akka.management" %% "akka-management-cluster-bootstrap" % discoveryVersion,
+      "com.lightbend.akka.discovery" %% "akka-discovery-kubernetes-api" % discoveryVersion,
+    ),
+    */
     javaAgents += "org.mortbay.jetty.alpn" % "jetty-alpn-agent" % alpnVersion % "runtime",
     // gRPC endpoint
     endpoints += HttpEndpoint(
