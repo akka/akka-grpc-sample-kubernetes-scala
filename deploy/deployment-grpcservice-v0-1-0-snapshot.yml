@@ -1,0 +1,152 @@
+apiVersion: "apps/v1beta2"
+kind: Deployment
+metadata:
+  name: "grpcservice-v0-1-0-snapshot"
+  labels:
+    appName: grpcservice
+    appNameVersion: "grpcservice-v0-1-0-snapshot"
+spec:
+  replicas: 2
+  selector:
+    matchLabels:
+      appNameVersion: "grpcservice-v0-1-0-snapshot"
+  template:
+    metadata:
+      labels:
+        appName: grpcservice
+        appNameVersion: "grpcservice-v0-1-0-snapshot"
+    spec:
+      restartPolicy: Always
+      containers:
+        - name: redis
+          image: redis
+        - name: grpcservice
+          image: "grpcservice:0.1.0-SNAPSHOT"
+          imagePullPolicy: IfNotPresent
+          env:
+            - name: "RP_APP_NAME"
+              value: grpcService
+            - name: "RP_APP_TYPE"
+              value: basic
+            - name: "RP_APP_VERSION"
+              value: "0.1.0-SNAPSHOT"
+            - name: "RP_DYN_JAVA_OPTS"
+              value: "-Dakka.discovery.kubernetes-api.pod-namespace=$RP_NAMESPACE"
+            - name: "RP_ENDPOINTS"
+              value: "AKKA_REMOTE,AKKA_MGMT_HTTP,HTTP"
+            - name: "RP_ENDPOINTS_COUNT"
+              value: "3"
+            - name: "RP_ENDPOINT_0_BIND_HOST"
+              valueFrom:
+                fieldRef:
+                  fieldPath: "status.podIP"
+            - name: "RP_ENDPOINT_0_BIND_PORT"
+              value: "10000"
+            - name: "RP_ENDPOINT_0_HOST"
+              valueFrom:
+                fieldRef:
+                  fieldPath: "status.podIP"
+            - name: "RP_ENDPOINT_0_PORT"
+              value: "10000"
+            - name: "RP_ENDPOINT_1_BIND_HOST"
+              valueFrom:
+                fieldRef:
+                  fieldPath: "status.podIP"
+            - name: "RP_ENDPOINT_1_BIND_PORT"
+              value: "10001"
+            - name: "RP_ENDPOINT_1_HOST"
+              valueFrom:
+                fieldRef:
+                  fieldPath: "status.podIP"
+            - name: "RP_ENDPOINT_1_PORT"
+              value: "10001"
+            - name: "RP_ENDPOINT_2_BIND_HOST"
+              valueFrom:
+                fieldRef:
+                  fieldPath: "status.podIP"
+            - name: "RP_ENDPOINT_2_BIND_PORT"
+              value: "8080"
+            - name: "RP_ENDPOINT_2_HOST"
+              valueFrom:
+                fieldRef:
+                  fieldPath: "status.podIP"
+            - name: "RP_ENDPOINT_2_PORT"
+              value: "8080"
+            - name: "RP_ENDPOINT_AKKA_MGMT_HTTP_BIND_HOST"
+              valueFrom:
+                fieldRef:
+                  fieldPath: "status.podIP"
+            - name: "RP_ENDPOINT_AKKA_MGMT_HTTP_BIND_PORT"
+              value: "10001"
+            - name: "RP_ENDPOINT_AKKA_MGMT_HTTP_HOST"
+              valueFrom:
+                fieldRef:
+                  fieldPath: "status.podIP"
+            - name: "RP_ENDPOINT_AKKA_MGMT_HTTP_PORT"
+              value: "10001"
+            - name: "RP_ENDPOINT_AKKA_REMOTE_BIND_HOST"
+              valueFrom:
+                fieldRef:
+                  fieldPath: "status.podIP"
+            - name: "RP_ENDPOINT_AKKA_REMOTE_BIND_PORT"
+              value: "10000"
+            - name: "RP_ENDPOINT_AKKA_REMOTE_HOST"
+              valueFrom:
+                fieldRef:
+                  fieldPath: "status.podIP"
+            - name: "RP_ENDPOINT_AKKA_REMOTE_PORT"
+              value: "10000"
+            - name: "RP_ENDPOINT_HTTP_BIND_HOST"
+              valueFrom:
+                fieldRef:
+                  fieldPath: "status.podIP"
+            - name: "RP_ENDPOINT_HTTP_BIND_PORT"
+              value: "8080"
+            - name: "RP_ENDPOINT_HTTP_HOST"
+              valueFrom:
+                fieldRef:
+                  fieldPath: "status.podIP"
+            - name: "RP_ENDPOINT_HTTP_PORT"
+              value: "8080"
+            - name: "RP_JAVA_OPTS"
+              value: "-Dconfig.resource=rp-application.conf -Dakka.discovery.method=kubernetes-api -Dakka.management.cluster.bootstrap.contact-point-discovery.effective-name=grpcservice -Dakka.management.cluster.bootstrap.contact-point-discovery.required-contact-point-nr=2 -Dakka.discovery.kubernetes-api.pod-label-selector=appName=%s"
+            - name: "RP_KUBERNETES_POD_IP"
+              valueFrom:
+                fieldRef:
+                  fieldPath: "status.podIP"
+            - name: "RP_KUBERNETES_POD_NAME"
+              valueFrom:
+                fieldRef:
+                  fieldPath: "metadata.name"
+            - name: "RP_MODULES"
+              value: "akka-cluster-bootstrapping,akka-management,common,service-discovery,status"
+            - name: "RP_NAMESPACE"
+              valueFrom:
+                fieldRef:
+                  fieldPath: "metadata.namespace"
+            - name: "RP_PLATFORM"
+              value: kubernetes
+          ports:
+            - containerPort: 10000
+              name: "akka-remote"
+            - containerPort: 10001
+              name: "akka-mgmt-http"
+            - containerPort: 8080
+              name: http
+          volumeMounts: []
+          command:
+            - "/rp-start"
+          args:
+            - "bin/grpcservice"
+          readinessProbe:
+            httpGet:
+              path: "/platform-tooling/ready"
+              port: "akka-mgmt-http"
+            periodSeconds: 10
+          livenessProbe:
+            httpGet:
+              path: "/platform-tooling/healthy"
+              port: "akka-mgmt-http"
+            periodSeconds: 10
+            initialDelaySeconds: 60
+      volumes: []

@@ -39,7 +39,8 @@ lazy val grpcService = (project in file("grpc-service"))
     endpoints += HttpEndpoint(
       name = "http",
       port = 8080
-    )
+    ),
+    enableAkkaClusterBootstrap := true
   )
 
 

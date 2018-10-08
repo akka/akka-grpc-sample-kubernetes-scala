@@ -1,0 +1,22 @@
+apiVersion: v1
+kind: Service
+metadata:
+  labels:
+    appName: grpcservice
+  name: grpcservice
+spec:
+  ports:
+    - name: "akka-remote"
+      port: 10000
+      protocol: TCP
+      targetPort: 10000
+    - name: "akka-mgmt-http"
+      port: 10001
+      protocol: TCP
+      targetPort: 10001
+    - name: http
+      port: 8080
+      protocol: TCP
+      targetPort: 8080
+  selector:
+    appName: grpcservice
