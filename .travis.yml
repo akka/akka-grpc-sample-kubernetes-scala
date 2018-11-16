@@ -2,7 +2,7 @@ sudo: required
 dist: xenial
 language: scala
 scala:
-  - 2.12.6
+  - 2.12.7
 jdk:
 - oraclejdk8
 - oraclejdk11
