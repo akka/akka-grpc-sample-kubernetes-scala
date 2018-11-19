@@ -22,7 +22,7 @@ object HttpToGrpc {
     val log: LoggingAdapter = system.log
 
     val settings = GrpcClientSettings.fromConfig("helloworld.GreeterService")
-    val client = new GreeterServiceClient(settings)
+    val client = GreeterServiceClient(settings)
 
     system.scheduler.schedule(5.seconds, 5.seconds, new Runnable {
       override def run(): Unit = {
