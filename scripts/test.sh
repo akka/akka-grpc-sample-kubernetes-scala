@@ -21,12 +21,15 @@ then
   exit -1
 fi
 
-REPLY=`curl --header 'Host: superservice.com' $(minikube ip)/hello/donkey`
-if [ "$REPLY" = 'Hello, donkey' ]
+for i in {1..10}
+do
+  REPLY=`curl --header 'Host: superservice.com' $(minikube ip)/hello/donkey`
+  [ "$REPLY" = 'Hello, donkey' ] && break
+  sleep 4
+done  
+
+if [ $i -eq 10 ]
 then
-  echo "Success!"
-else
   echo "Got reply '$REPLY' instead of 'Hello, donkey'"
   exit -1
 fi
-
