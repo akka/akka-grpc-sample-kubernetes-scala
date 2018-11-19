@@ -2,7 +2,10 @@
 
 set -exu
 
-sbt 'deploy minikube'
+sbt docker:publishLocal
+
+kubectl apply -f kubernetes/grpcservice.yml
+kubectl apply -f kubernetes/httptogrpc.yml
 
 for i in {1..10}
 do
