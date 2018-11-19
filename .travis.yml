@@ -8,7 +8,7 @@ jdk:
 - oraclejdk11
 
 script:
-  - ./scripts/setup-minikube-for-linux.sh && ./scripts/setup-rp.sh && minikube docker-env --shell bash && ./scripts/test.sh
+  - ./scripts/setup-minikube-for-linux.sh && minikube docker-env --shell bash && ./scripts/test.sh
 
 cache:
   directories:
