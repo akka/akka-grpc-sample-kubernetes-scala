@@ -3,8 +3,10 @@ scala:
   - 2.12.6
 jdk:
 - oraclejdk8
-- oraclejdk10
 - oraclejdk11
+
+script:
+  - ./scripts/setup-minikube-for-linux.sh && ./scripts/test.sh
 
 cache:
   directories:
