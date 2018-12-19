@@ -2,10 +2,16 @@ sudo: required
 dist: xenial
 language: scala
 scala:
-  - 2.12.7
-jdk:
-- oraclejdk8
-- oraclejdk11
+  - 2.12.8
+env:
+  - TRAVIS_JDK=1.8
+  - TRAVIS_JDK=1.11
+
+before_install:
+  - curl -sL https://raw.githubusercontent.com/shyiko/jabba/0.10.1/install.sh | bash && . ~/.jabba/jabba.sh
+
+install:
+  - $JABBA_HOME/bin/jabba install $TRAVIS_JDK && export JAVA_HOME="$JABBA_HOME/jdk/$TRAVIS_JDK" && export PATH="$JAVA_HOME/bin:$PATH" && java -Xmx32m -version
 
 script:
   - ./scripts/setup-minikube-for-linux.sh && minikube docker-env --shell bash && ./scripts/test.sh
@@ -14,6 +20,7 @@ cache:
   directories:
   - $HOME/.ivy2/cache
   - $HOME/.sbt
+  - $HOME/.jabba/jdk
 
 before_cache:
 - rm -rf $HOME/.ivy2/cache/com.typesafe.play/*
