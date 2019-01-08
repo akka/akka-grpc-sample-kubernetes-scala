@@ -18,9 +18,12 @@ done
 if [ $i -eq 10 ]
 then
   echo "Pods did not get ready"
+  kubectl get pods | tail -2 | cut -d " " -f 1 | while read line ; do echo "=== $line ==="; kubectl logs $line ; done
   exit -1
 fi
 
+# A couple of 'nginx bad gateway' are expected, but after a while
+# it should start responding:
 for i in {1..10}
 do
   REPLY=`curl --header 'Host: superservice.com' $(sudo -E minikube ip)/hello/donkey || true`
