@@ -31,4 +31,11 @@ for i in {1..150}; do # timeout for 5 minutes
     sleep 2
 done
 
+if [ $i -eq 150 ]
+then
+  echo "Kubectl is not ready"
+  ls -alFh ~/.minikube/machines/minikube/config.json
+  kubectl get po
+fi
+
 # kubectl commands are now able to interact with Minikube cluster
