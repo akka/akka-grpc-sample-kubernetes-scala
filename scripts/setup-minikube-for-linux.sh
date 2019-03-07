@@ -19,7 +19,7 @@ touch $HOME/.kube/config
 export KUBECONFIG=$HOME/.kube/config
 sudo -E minikube start --vm-driver=none
 sudo -E minikube addons enable ingress
-sudo -E chmod a+r ~/.minikube/machines/minikube/config.json
+sudo -E chmod a+r ~/.minikube/client.key
 
 # this for loop waits until kubectl can access the api server that Minikube has created
 set +e
@@ -34,7 +34,6 @@ done
 if [ $i -eq 150 ]
 then
   echo "Kubectl is not ready"
-  ls -alFh ~/.minikube/machines/minikube/config.json
   kubectl get po
 fi
 
