@@ -20,6 +20,7 @@ export KUBECONFIG=$HOME/.kube/config
 sudo -E minikube start --vm-driver=none
 sudo -E minikube addons enable ingress
 sudo -E chmod a+r ~/.minikube/client.key
+sudo -E chmod a+r ~/.minikube/machines/minikube/config.json
 
 # this for loop waits until kubectl can access the api server that Minikube has created
 set +e
