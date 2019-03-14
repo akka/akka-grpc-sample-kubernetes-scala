@@ -14,7 +14,7 @@ install:
   - $JABBA_HOME/bin/jabba install $TRAVIS_JDK && export JAVA_HOME="$JABBA_HOME/jdk/$TRAVIS_JDK" && export PATH="$JAVA_HOME/bin:$PATH" && java -Xmx32m -version
 
 script:
-  - ./scripts/setup-minikube-for-linux.sh && minikube docker-env --shell bash && ./scripts/test.sh
+  - ./scripts/setup-minikube-for-linux.sh && ./scripts/test.sh
 
 cache:
   directories:
