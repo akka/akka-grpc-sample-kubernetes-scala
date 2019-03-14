@@ -35,6 +35,11 @@ if [ $i -eq 150 ]
 then
   echo "Kubectl is not ready"
   kubectl get po
+  exit 1
 fi
+
+echo "Kubectl is now ready"
+kubectl get po
+minikube docker-env --shell bash
 
 # kubectl commands are now able to interact with Minikube cluster
