@@ -42,6 +42,5 @@ echo "Kubectl is now ready"
 kubectl get po
 minikube version
 minikube addons list
-minikube docker-env --shell bash
 
 # kubectl commands are now able to interact with Minikube cluster
