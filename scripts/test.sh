@@ -23,7 +23,7 @@ fi
 
 for i in {1..10}
 do
-  REPLY=`curl --header 'Host: superservice.com' $(sudo -E minikube ip)/hello/donkey`
+  REPLY=`curl --header 'Host: superservice.com' $(sudo -E minikube ip)/hello/donkey || true`
   [ "$REPLY" = 'Hello, donkey' ] && break
   sleep 4
 done  
