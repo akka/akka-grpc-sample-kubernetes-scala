@@ -31,5 +31,6 @@ done
 if [ $i -eq 10 ]
 then
   echo "Got reply '$REPLY' instead of 'Hello, donkey'"
+  kubectl get pods | tail -2 | cut -d " " -f 1 | while read line ; do echo "=== $line ==="; kubectl logs $line ; done
   exit -1
 fi
