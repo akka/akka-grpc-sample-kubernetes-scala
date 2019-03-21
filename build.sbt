@@ -14,7 +14,11 @@ lazy val httpToGrpc = (project in file("http-to-grpc"))
   .enablePlugins(AkkaGrpcPlugin, SbtReactiveAppPlugin, JavaAgent)
   .settings(
     libraryDependencies ++= Seq(
+      "com.typesafe.akka" %% "akka-parsing" % akkaHttpVersion,
+      "com.typesafe.akka" %% "akka-http-core" % akkaHttpVersion,
       "com.typesafe.akka" %% "akka-http" % akkaHttpVersion,
+      "com.typesafe.akka" %% "akka-http-spray-json" % akkaHttpVersion,
+      "com.typesafe.akka" %% "akka-http2-support" % akkaHttpVersion,
       "com.lightbend.akka.discovery" %% "akka-discovery-kubernetes-api" % discoveryVersion,
     ),
     javaAgents += "org.mortbay.jetty.alpn" % "jetty-alpn-agent" % alpnVersion % "runtime",
