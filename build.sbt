@@ -3,7 +3,7 @@ scalaVersion := "2.12.6"
 
 lazy val akkaVersion = "2.5.21"
 lazy val discoveryVersion = "1.0.0"
-lazy val akkaHttpVersion = "10.1.5"
+lazy val akkaHttpVersion = "10.1.8"
 lazy val alpnVersion = "2.0.9"
 
 lazy val root = (project in file("."))
