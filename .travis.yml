@@ -4,8 +4,8 @@ language: scala
 scala:
   - 2.12.8
 env:
-  - TRAVIS_JDK=1.8
-  - TRAVIS_JDK=1.11
+  - TRAVIS_JDK=adopt@1.8
+  - TRAVIS_JDK=adopt@1.11
 
 before_install:
   - curl -sL https://raw.githubusercontent.com/shyiko/jabba/0.10.1/install.sh | bash && . ~/.jabba/jabba.sh
