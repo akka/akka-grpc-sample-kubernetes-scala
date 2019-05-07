@@ -79,10 +79,6 @@ spec:
             - containerPort: 8080
               name: http
           volumeMounts: []
-          command:
-            - "/rp-start"
-          args:
-            - "bin/grpcservice"
       volumes: []
 ---
 apiVersion: v1

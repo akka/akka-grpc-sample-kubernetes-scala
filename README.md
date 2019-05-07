@@ -5,15 +5,11 @@ This is an example of an [Akka HTTP](https://doc.akka.io/docs/akka-http/current)
 The Akka HTTP application discovers the Akka gRPC application using [Akka Discovery](https://developer.lightbend.com/docs/akka-management/current/discovery.html).
 It uses the `akka-dns` mechanism which relies on the `SRV` records created by kubernetes.
 
-The Docker images and Kubernetes resources are generated automatically by the [sbt-reactive-app](https://developer.lightbend.com/docs/lightbend-orchestration/current/) sbt plugin.
-
 All the technologies used in this example are open source.
 
 ## Other approaches
 
-This project uses sbt,
-the [sbt-reactive-app](https://developer.lightbend.com/docs/lightbend-orchestration/current/)
-plugin and the Scala language.
+This project uses sbt and the Scala language.
 
 If you are using Java and sbt you can use exactly the same approach.
 
@@ -30,13 +26,16 @@ Install the following:
 * [Kubectl](https://kubernetes.io/docs/tasks/tools/install-kubectl/)
 * [Minikube](https://github.com/kubernetes/minikube)
 * [Sbt](https://www.scala-sbt.org/)
-* [reactive-cli](https://developer.lightbend.com/docs/lightbend-orchestration/current/setup/cli-installation.html)
 
 ### Running
 
 Once minikube is running the two applications can be deployed using:
 
-`sbt 'deploy minikube'`
+`kubectl apply -f kubernetes/grpcservice.yml`
+
+and
+
+`kubectl apply -f kubernetes/httptogrpc.yml`
 
 Verify the deployments:
 
