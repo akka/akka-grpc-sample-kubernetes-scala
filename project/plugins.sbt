@@ -1,3 +1,3 @@
 addSbtPlugin("com.lightbend.akka.grpc" % "sbt-akka-grpc" % "0.6.1")
 addSbtPlugin("com.lightbend.sbt" % "sbt-javaagent" % "0.1.5")
-addSbtPlugin("com.lightbend.rp" % "sbt-reactive-app" % "1.4.0")
+addSbtPlugin("com.typesafe.sbt" % "sbt-native-packager" % "1.3.21")
