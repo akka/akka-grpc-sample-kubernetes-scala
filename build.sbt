@@ -1,7 +1,7 @@
 name := "akka-grpc-kubernetes"
-scalaVersion := "2.12.6"
+scalaVersion := "2.12.8"
 
-lazy val akkaVersion = "2.5.22"
+lazy val akkaVersion = "2.5.23"
 lazy val discoveryVersion = "1.0.0"
 lazy val akkaHttpVersion = "10.1.8"
 lazy val alpnVersion = "2.0.9"
@@ -16,11 +16,15 @@ lazy val httpToGrpc = (project in file("http-to-grpc"))
     libraryDependencies ++= Seq(
       "com.typesafe.akka" %% "akka-actor" % akkaVersion,
       "com.typesafe.akka" %% "akka-discovery" % akkaVersion,
+      "com.typesafe.akka" %% "akka-protobuf" % akkaVersion,
+      "com.typesafe.akka" %% "akka-stream" % akkaVersion,
+
       "com.typesafe.akka" %% "akka-parsing" % akkaHttpVersion,
       "com.typesafe.akka" %% "akka-http-core" % akkaHttpVersion,
       "com.typesafe.akka" %% "akka-http" % akkaHttpVersion,
       "com.typesafe.akka" %% "akka-http-spray-json" % akkaHttpVersion,
       "com.typesafe.akka" %% "akka-http2-support" % akkaHttpVersion,
+
       "com.lightbend.akka.discovery" %% "akka-discovery-kubernetes-api" % discoveryVersion,
     ),
     javaAgents += "org.mortbay.jetty.alpn" % "jetty-alpn-agent" % alpnVersion % "runtime",
