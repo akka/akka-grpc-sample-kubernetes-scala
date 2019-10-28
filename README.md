@@ -31,7 +31,7 @@ Install the following:
 
 ### Running
 
-Once minikube is running the two applications can be deployed using:
+Once minikube is running and ingress enabled with `minikube addons enable ingress`, the two applications can be deployed using:
 
 `kubectl apply -f kubernetes/grpcservice.yml`
 
