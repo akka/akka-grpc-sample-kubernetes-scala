@@ -15,6 +15,7 @@ lazy val httpToGrpc = (project in file("http-to-grpc"))
   .settings(
     libraryDependencies ++= Seq(
       "com.typesafe.akka" %% "akka-actor-typed" % akkaVersion,
+      "com.typesafe.akka" %% "akka-slf4j" % akkaVersion,
       "com.typesafe.akka" %% "akka-discovery" % akkaVersion,
       "com.typesafe.akka" %% "akka-stream" % akkaVersion,
 
@@ -25,6 +26,8 @@ lazy val httpToGrpc = (project in file("http-to-grpc"))
       "com.typesafe.akka" %% "akka-http2-support" % akkaHttpVersion,
 
       "com.lightbend.akka.discovery" %% "akka-discovery-kubernetes-api" % discoveryVersion,
+
+      "ch.qos.logback" % "logback-classic" % "1.2.3"
     ),
     javaAgents += "org.mortbay.jetty.alpn" % "jetty-alpn-agent" % alpnVersion % "runtime",
     dockerExposedPorts := Seq(8080),
@@ -35,10 +38,13 @@ lazy val grpcService = (project in file("grpc-service"))
   .settings(
     javaAgents += "org.mortbay.jetty.alpn" % "jetty-alpn-agent" % alpnVersion % "runtime",
     dockerExposedPorts := Seq(8080),
-    dependencyOverrides ++= Seq(
+    libraryDependencies ++= Seq(
       "com.typesafe.akka" %% "akka-actor" % akkaVersion,
+      "com.typesafe.akka" %% "akka-actor-typed" % akkaVersion,
+      "com.typesafe.akka" %% "akka-slf4j" % akkaVersion,
       "com.typesafe.akka" %% "akka-stream" % akkaVersion,
       "com.typesafe.akka" %% "akka-discovery" % akkaVersion,
+      "ch.qos.logback" % "logback-classic" % "1.2.3"
     )
   )
 
