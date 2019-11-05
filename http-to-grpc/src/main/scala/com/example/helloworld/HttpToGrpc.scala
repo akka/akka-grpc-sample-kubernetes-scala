@@ -17,22 +17,20 @@ object HttpToGrpc {
 
   def main(args: Array[String]): Unit = {
     implicit val system: ActorSystem = ActorSystem("HttpToGrpc")
-    implicit val mat: Materializer = ActorMaterializer()
+    implicit val mat: Materializer = Materializer(system)
     implicit val ec: ExecutionContext = system.dispatcher
     val log: LoggingAdapter = system.log
 
     val settings = GrpcClientSettings.fromConfig("helloworld.GreeterService")
     val client = GreeterServiceClient(settings)
 
-    system.scheduler.schedule(5.seconds, 5.seconds, new Runnable {
-      override def run(): Unit = {
+    system.scheduler.scheduleAtFixedRate(5.seconds, 5.seconds)(() => {
         log.info("Scheduled say hello to chris")
         val response: Future[HelloReply] = client.sayHello(HelloRequest("Christopher"))
         response.onComplete { r =>
           log.info("Scheduled say hello response {}", r)
         }
-      }
-    })
+      })
 
     val route =
       path("hello" / Segment) { name =>

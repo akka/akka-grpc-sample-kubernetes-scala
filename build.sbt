@@ -1,9 +1,9 @@
 name := "akka-grpc-kubernetes"
-scalaVersion := "2.12.8"
+scalaVersion := "2.13.1"
 
-lazy val akkaVersion = "2.5.25"
-lazy val discoveryVersion = "1.0.3"
-lazy val akkaHttpVersion = "10.1.9"
+lazy val akkaVersion = "2.6.0-RC2"
+lazy val discoveryVersion = "1.0.4"
+lazy val akkaHttpVersion = "10.1.10"
 lazy val alpnVersion = "2.0.9"
 
 lazy val root = (project in file("."))
@@ -14,9 +14,8 @@ lazy val httpToGrpc = (project in file("http-to-grpc"))
   .enablePlugins(AkkaGrpcPlugin, DockerPlugin, JavaAppPackaging, JavaAgent)
   .settings(
     libraryDependencies ++= Seq(
-      "com.typesafe.akka" %% "akka-actor" % akkaVersion,
+      "com.typesafe.akka" %% "akka-actor-typed" % akkaVersion,
       "com.typesafe.akka" %% "akka-discovery" % akkaVersion,
-      "com.typesafe.akka" %% "akka-protobuf" % akkaVersion,
       "com.typesafe.akka" %% "akka-stream" % akkaVersion,
 
       "com.typesafe.akka" %% "akka-parsing" % akkaHttpVersion,
@@ -36,6 +35,11 @@ lazy val grpcService = (project in file("grpc-service"))
   .settings(
     javaAgents += "org.mortbay.jetty.alpn" % "jetty-alpn-agent" % alpnVersion % "runtime",
     dockerExposedPorts := Seq(8080),
+    dependencyOverrides ++= Seq(
+      "com.typesafe.akka" %% "akka-actor" % akkaVersion,
+      "com.typesafe.akka" %% "akka-stream" % akkaVersion,
+      "com.typesafe.akka" %% "akka-discovery" % akkaVersion,
+    )
   )
 
 
