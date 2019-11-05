@@ -21,18 +21,17 @@ class GreeterServer(system: ActorSystem) {
 
   def run(): Future[Http.ServerBinding] = {
     implicit val sys: ActorSystem = system
-    implicit val mat: Materializer = ActorMaterializer()
+    implicit val mat: Materializer = Materializer(sys)
     implicit val ec: ExecutionContext = sys.dispatcher
 
     val service: HttpRequest => Future[HttpResponse] =
       GreeterServiceHandler(new GreeterServiceImpl(mat, system.log))
 
-    val bound = Http2().bindAndHandleAsync(
+    val bound = Http().bindAndHandleAsync(
       service,
       interface = "0.0.0.0",
       port = 8080,
-      HttpConnectionContext(http2 = Always)
-    )
+      connectionContext = HttpConnectionContext())
 
     bound.foreach { binding =>
       sys.log.info("gRPC server bound to: {}", binding.localAddress)
