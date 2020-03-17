@@ -2,7 +2,7 @@ name := "akka-grpc-kubernetes"
 scalaVersion := "2.13.1"
 
 lazy val akkaVersion = "2.6.4"
-lazy val discoveryVersion = "1.0.5"
+lazy val discoveryVersion = "1.0.6"
 lazy val akkaHttpVersion = "10.1.11"
 lazy val alpnVersion = "2.0.9"
 
