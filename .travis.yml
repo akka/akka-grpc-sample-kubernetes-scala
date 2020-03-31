@@ -1,6 +1,10 @@
 sudo: required
 dist: xenial
 language: scala
+addons:
+  apt:
+    packages:
+    - conntrack
 scala:
   - 2.12.8
 env:
