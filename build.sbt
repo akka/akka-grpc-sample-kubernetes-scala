@@ -1,9 +1,9 @@
 name := "akka-grpc-kubernetes"
-scalaVersion := "2.13.1"
+scalaVersion := "2.13.3"
 
 lazy val akkaVersion = "2.6.10"
 lazy val discoveryVersion = "1.0.9"
-lazy val akkaHttpVersion = "10.1.12"
+lazy val akkaHttpVersion = "10.2.1"
 
 lazy val root = (project in file("."))
   .aggregate(httpToGrpc, grpcService)
