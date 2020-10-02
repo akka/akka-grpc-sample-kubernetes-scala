@@ -1,7 +1,6 @@
 package com.example.helloworld
 
 import akka.actor.ActorSystem
-import akka.http.scaladsl.UseHttp2.Always
 import akka.http.scaladsl.model.{HttpRequest, HttpResponse}
 import akka.http.scaladsl.{Http, Http2, HttpConnectionContext}
 import akka.stream.{ActorMaterializer, Materializer}

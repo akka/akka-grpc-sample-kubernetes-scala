@@ -41,6 +41,9 @@ lazy val grpcService = (project in file("grpc-service"))
       "com.typesafe.akka" %% "akka-slf4j" % akkaVersion,
       "com.typesafe.akka" %% "akka-stream" % akkaVersion,
       "com.typesafe.akka" %% "akka-discovery" % akkaVersion,
+
+      "com.typesafe.akka" %% "akka-http-core" % akkaHttpVersion,
+
       "ch.qos.logback" % "logback-classic" % "1.2.3"
     )
   )
