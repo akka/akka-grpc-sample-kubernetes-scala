@@ -4,7 +4,7 @@ scalaVersion := "2.13.1"
 lazy val akkaVersion = "2.6.10"
 lazy val discoveryVersion = "1.0.8"
 lazy val akkaHttpVersion = "10.1.12"
-lazy val alpnVersion = "2.0.9"
+lazy val alpnVersion = "2.0.10"
 
 lazy val root = (project in file("."))
   .aggregate(httpToGrpc, grpcService)
