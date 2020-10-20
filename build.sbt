@@ -4,14 +4,13 @@ scalaVersion := "2.13.1"
 lazy val akkaVersion = "2.6.10"
 lazy val discoveryVersion = "1.0.8"
 lazy val akkaHttpVersion = "10.1.12"
-lazy val alpnVersion = "2.0.9"
 
 lazy val root = (project in file("."))
   .aggregate(httpToGrpc, grpcService)
 
 // Http front end that calls out to a gRPC back end
 lazy val httpToGrpc = (project in file("http-to-grpc"))
-  .enablePlugins(AkkaGrpcPlugin, DockerPlugin, JavaAppPackaging, JavaAgent)
+  .enablePlugins(AkkaGrpcPlugin, DockerPlugin, JavaAppPackaging)
   .settings(
     libraryDependencies ++= Seq(
       "com.typesafe.akka" %% "akka-actor-typed" % akkaVersion,
@@ -29,14 +28,12 @@ lazy val httpToGrpc = (project in file("http-to-grpc"))
 
       "ch.qos.logback" % "logback-classic" % "1.2.3"
     ),
-    javaAgents += "org.mortbay.jetty.alpn" % "jetty-alpn-agent" % alpnVersion % "runtime",
     dockerExposedPorts := Seq(8080),
   )
 
 lazy val grpcService = (project in file("grpc-service"))
-  .enablePlugins(AkkaGrpcPlugin, DockerPlugin, JavaAppPackaging, JavaAgent)
+  .enablePlugins(AkkaGrpcPlugin, DockerPlugin, JavaAppPackaging)
   .settings(
-    javaAgents += "org.mortbay.jetty.alpn" % "jetty-alpn-agent" % alpnVersion % "runtime",
     dockerExposedPorts := Seq(8080),
     libraryDependencies ++= Seq(
       "com.typesafe.akka" %% "akka-actor" % akkaVersion,
