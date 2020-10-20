@@ -8,7 +8,7 @@ addons:
 scala:
   - 2.12.8
 env:
-  - TRAVIS_JDK=adopt@1.8.0-222
+  - TRAVIS_JDK=adopt@1.8.0-252
   - TRAVIS_JDK=adopt@1.11.0-4
 
 before_install:
