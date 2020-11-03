@@ -6,10 +6,10 @@ addons:
     packages:
     - conntrack
 scala:
-  - 2.12.8
+  - 2.12.12
 env:
-  - TRAVIS_JDK=adopt@1.8.0-222
-  - TRAVIS_JDK=adopt@1.11.0-4
+  - TRAVIS_JDK=adopt@1.8.0-272
+  - TRAVIS_JDK=adopt@1.11.0-9
 
 before_install:
   - curl -sL https://raw.githubusercontent.com/shyiko/jabba/0.10.1/install.sh | bash && . ~/.jabba/jabba.sh
