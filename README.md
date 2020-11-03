@@ -9,6 +9,8 @@ It uses the `akka-dns` mechanism which relies on the `SRV` records created by ku
 
 All the technologies used in this example are open source.
 
+test
+
 ## Other approaches
 
 This project uses sbt and the Scala language.
