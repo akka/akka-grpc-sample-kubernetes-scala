@@ -45,7 +45,7 @@ object HttpToGrpc {
         }
       }
 
-    val bindingFuture = Http().bindAndHandle(route, "0.0.0.0", 8080)
+    val bindingFuture = Http().newServerAt("0.0.0.0", 8080).bindFlow(route)
     bindingFuture.onComplete {
       case Success(sb) =>
         log.info("Bound: {}", sb)

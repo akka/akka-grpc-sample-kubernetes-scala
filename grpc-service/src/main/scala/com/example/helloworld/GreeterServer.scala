@@ -1,7 +1,6 @@
 package com.example.helloworld
 
 import akka.actor.ActorSystem
-import akka.http.scaladsl.UseHttp2.Always
 import akka.http.scaladsl.model.{HttpRequest, HttpResponse}
 import akka.http.scaladsl.{Http, Http2, HttpConnectionContext}
 import akka.stream.{ActorMaterializer, Materializer}
@@ -27,11 +26,7 @@ class GreeterServer(system: ActorSystem) {
     val service: HttpRequest => Future[HttpResponse] =
       GreeterServiceHandler(new GreeterServiceImpl(mat, system.log))
 
-    val bound = Http().bindAndHandleAsync(
-      service,
-      interface = "0.0.0.0",
-      port = 8080,
-      connectionContext = HttpConnectionContext())
+    val bound = Http().newServerAt("0.0.0.0", 8080).bind(service)
 
     bound.foreach { binding =>
       sys.log.info("gRPC server bound to: {}", binding.localAddress)
