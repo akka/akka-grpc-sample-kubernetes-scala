@@ -2,7 +2,7 @@ package com.example.helloworld
 
 import akka.actor.ActorSystem
 import akka.http.scaladsl.model.{HttpRequest, HttpResponse}
-import akka.http.scaladsl.{Http, Http2, HttpConnectionContext}
+import akka.http.scaladsl.{Http, HttpConnectionContext}
 import akka.stream.{ActorMaterializer, Materializer}
 
 import scala.concurrent.{ExecutionContext, Future}
