@@ -6,7 +6,7 @@ addons:
     packages:
     - conntrack
 scala:
-  - 2.12.12
+  - 2.12.15
 env:
   - TRAVIS_JDK=adopt@1.8.0-272
   - TRAVIS_JDK=adopt@1.11.0-9
