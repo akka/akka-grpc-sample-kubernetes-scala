@@ -1,5 +1,6 @@
 name := "akka-grpc-kubernetes"
 scalaVersion := "2.13.3"
+resolvers += "Akka library repository".at("https://repo.akka.io/maven")
 
 lazy val akkaVersion = "2.6.14"
 lazy val discoveryVersion = "1.0.9"
